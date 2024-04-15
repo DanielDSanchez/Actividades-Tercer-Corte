@@ -2,7 +2,7 @@
 #include <map>
 #include <string>
 #include <algorithm>
-#include <vector>
+#include <set>
 using namespace std;
 
 class InfoDepartamento
@@ -93,7 +93,7 @@ private:
 public:
     Codazi();
     InfoDepartamento buscarDepartamento();
-    vector<InfoDepartamento> buscarDepartamentosPorClima();
+    set<InfoDepartamento> buscarDepartamentosPorClima();
 };
 
 Codazi::Codazi()
@@ -192,9 +192,9 @@ InfoDepartamento Codazi::buscarDepartamento()
     return info;
 }
 
-vector<InfoDepartamento> Codazi::buscarDepartamentosPorClima()
+set<InfoDepartamento> Codazi::buscarDepartamentosPorClima()
 {
-    vector<InfoDepartamento> departamentos;
+    set<InfoDepartamento> departamentos;
     string clima;
     cout << "Ingrese el clima: ";
     cin >> clima;
@@ -207,7 +207,7 @@ vector<InfoDepartamento> Codazi::buscarDepartamentosPorClima()
                                                           { return p.second == it->first; });
             if (itCol != this->colombia.end())
             {
-                departamentos.push_back(InfoDepartamento(it->first, itCol->first, it->second));
+                departamentos.insert(InfoDepartamento(it->first, itCol->first, it->second));
             }
         }
     }
@@ -219,7 +219,7 @@ int main(int argc, char const *argv[])
 
     int opcion = 0;
     Codazi codazi;
-    vector<InfoDepartamento> infoDepartamentos;
+    set<InfoDepartamento> infoDepartamentos;
     do
     {
         cout << "1. Buscar informacion por departamento" << endl;

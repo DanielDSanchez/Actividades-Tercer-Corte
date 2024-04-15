@@ -2,14 +2,14 @@
 #include <map>
 #include <string>
 #include <algorithm>
-#include <vector>
+#include <set>
 using namespace std;
 
 class CalificacionesURosario
 {
 private:
     // estudiante - asignaturas
-    map<string, vector<string>> estudiantes;
+    map<string, set<string>> estudiantes;
     // asignatura - (estudiante - calificacion)
     map<string, map<string, int>> asignaturas;
 
@@ -29,7 +29,7 @@ CalificacionesURosario::CalificacionesURosario()
 void CalificacionesURosario::showEstudiantes()
 {
     cout << "Estudiantes: " << endl;
-    for (map<string, vector<string>>::iterator it = this->estudiantes.begin(); it != this->estudiantes.end(); it++)
+    for (map<string, set<string>>::iterator it = this->estudiantes.begin(); it != this->estudiantes.end(); it++)
     {
         cout << it->first << endl;
     }
@@ -47,7 +47,7 @@ void CalificacionesURosario::addCalificacion()
     cout << "Calificacion: ";
     cin >> calificacion;
 
-    this->estudiantes[estudiante].push_back(asignatura);
+    this->estudiantes[estudiante].insert(asignatura);
     this->asignaturas.insert({asignatura, {{estudiante, calificacion}}});
 }
 
@@ -58,7 +58,7 @@ void CalificacionesURosario::notaAsignaturaEstudiante()
     string estudiante;
     cout << "Ingrese el nombre del estudiante para ver sus asignaturas: ";
     cin >> estudiante;
-    map<string, vector<string>>::iterator it = this->estudiantes.find(estudiante);
+    map<string, set<string>>::iterator it = this->estudiantes.find(estudiante);
     if (it != this->estudiantes.end())
     {
         cout << "Asignaturas: " << endl;
@@ -86,7 +86,7 @@ void CalificacionesURosario::avgNotasEstudianete()
     string estudiante;
     cout << "Ingrese el nombre del estudiante para ver su promedio de notas ";
     cin >> estudiante;
-    map<string, vector<string>>::iterator it = this->estudiantes.find(estudiante);
+    map<string, set<string>>::iterator it = this->estudiantes.find(estudiante);
     if (it != this->estudiantes.end())
     {
         int suma = 0;
@@ -134,6 +134,7 @@ int main(int argc, char const *argv[])
         cout << "2. Ver nota de una asignatura de un estudiante" << endl;
         cout << "3. Promedio de notas de un estudiante" << endl;
         cout << "4. Promedio de notas de una asignatura" << endl;
+        cin >> opcion;
 
         switch (opcion)
         {
