@@ -89,18 +89,18 @@ void CalificacionesURosario::avgNotasEstudianete()
     map<string, vector<string>>::iterator it = this->estudiantes.find(estudiante);
     if (it != this->estudiantes.end())
     {
-        int sum = 0;
-        int count = 0;
+        int suma = 0;
+        int numAsignatura = 0;
         for (string asignatura : it->second)
         {
             map<string, map<string, int>>::iterator itAsignatura = this->asignaturas.find(asignatura);
             if (itAsignatura != this->asignaturas.end())
             {
-                sum += itAsignatura->second.find(estudiante)->second;
-                count++;
+                suma += itAsignatura->second.find(estudiante)->second;
+                numAsignatura++;
             }
         }
-        cout << "Promedio de notas: " << (sum / count) << endl;
+        cout << "Promedio de notas: " << (suma / numAsignatura) << endl;
     }
 }
 
@@ -113,14 +113,14 @@ void CalificacionesURosario::avgNotasAsignatura()
     map<string, map<string, int>>::iterator itAsignatura = this->asignaturas.find(asignatura);
     if (itAsignatura != this->asignaturas.end())
     {
-        int sum = 0;
-        int count = 0;
+        int suma = 0;
+        int numAsignatura = 0;
         for (auto estudiante : itAsignatura->second)
         {
-            sum += estudiante.second;
-            count++;
+            suma += estudiante.second;
+            numAsignatura++;
         }
-        cout << "Promedio de notas: " << (sum / count) << endl;
+        cout << "Promedio de notas: " << (suma / numAsignatura) << endl;
     }
 }
 
